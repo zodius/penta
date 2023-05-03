@@ -1,13 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"time"
+	"penta/handler"
+	"penta/service"
+
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	for {
-		time.Sleep(1 * time.Second)
-		fmt.Println("work")
-	}
+	dirService := service.NewDirListService()
+
+	app := gin.New()
+
+	handler.AddHandler(app, dirService)
+
+	app.Run("0.0.0.0:8080")
 }
